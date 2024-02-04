@@ -7,17 +7,35 @@ import { useState } from "react";
 const categories = ["Все", "Завершенные", "Не завершенные"];
 
 function App() {
-  const [tasks, setTasks] = useState([
-    {
-      name: "Дописать статью",
-      isCompleted: false,
-    },
-    {
-      name: "Скачать сериал",
-      isCompleted: true,
-    },
-  ]);
+  const [tasks, setTasks] = useState([]);
   const [activeCategory, setActiveCategory] = useState(0);
+
+  function toggleTaskCompletion(name) {
+    const updatedTasks = tasks.map((task) => {
+      if (task.name === name) {
+        return {
+          name,
+          isCompleted: !task.isCompleted,
+        };
+      }
+      return task;
+    });
+    setTasks(updatedTasks);
+  }
+
+  function addTask(name) {
+    const newTask = {
+      name,
+      isCompleted: false,
+    };
+    const updatedTasks = [...tasks, newTask];
+    setTasks(updatedTasks);
+  }
+
+  function deleteTask(name) {
+    const updatedTasks = tasks.filter((task) => task.name !== name);
+    setTasks(updatedTasks);
+  }
 
   function sortingTasks() {
     if (activeCategory === 2) {
@@ -39,9 +57,13 @@ function App() {
             activeCategory={activeCategory}
             setActiveCategory={setActiveCategory}
           />
-          <TodoList tasks={sortingTasks()} />
+          <TodoList
+            toggleTaskCompletion={toggleTaskCompletion}
+            deleteTask={deleteTask}
+            tasks={sortingTasks()}
+          />
         </div>
-        <Footer />
+        <Footer addTask={addTask} />
       </div>
     </div>
   );

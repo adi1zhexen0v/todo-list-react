@@ -1,0 +1,16 @@
+.app-header {
+  height: 72px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-logo {
+  height: 48px;
+}
+
+.header-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--gray);
+}

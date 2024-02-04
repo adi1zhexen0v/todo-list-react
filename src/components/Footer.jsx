@@ -1,11 +1,18 @@
 import { useState } from "react";
 
-function Footer() {
+function Footer({ addTask }) {
   const [isOpen, setIsOpen] = useState(false);
   const [taskInput, setTaskInput] = useState("");
 
   function toogleForm() {
     setIsOpen(!isOpen);
+  }
+
+  function handleClickAddTask() {
+    if (taskInput.length !== 0) {
+      addTask(taskInput);
+      setTaskInput("");
+    }
   }
 
   function changeTaskInput(event) {
@@ -23,11 +30,15 @@ function Footer() {
             className="form-input"
             onChange={(event) => changeTaskInput(event)}
           />
-          <button className="form-btn">Добавить</button>
+          <button className="form-btn" onClick={handleClickAddTask}>
+            Добавить
+          </button>
         </form>
-      ) : null}
+      ) : (
+        <div></div>
+      )}
       <button className="footer-btn" onClick={toogleForm}>
-        +
+        {isOpen ? "-" : "+"}
       </button>
     </footer>
   );

@@ -1,0 +1,35 @@
+
+.todo-categories {
+  padding: 8px 0 32px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 24px;
+}
+
+.todo-categories-btn {
+  padding: 12px 18px;
+  border-radius: 18px;
+  background: var(--border-item);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--gray);
+  transition: 0.2s ease;
+}
+
+.todo-categories-btn:hover {
+  background-color: var(--border);
+  color: #fff;
+  cursor: pointer;
+}
+
+.todo-categories-btn__active {
+  background: var(--blue);
+  color: #fff;
+}
+
+.todo-categories-btn__active:hover {
+  background-color: var(--blue);
+  color: #fff;
+  cursor: default;
+}

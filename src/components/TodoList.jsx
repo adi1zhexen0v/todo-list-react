@@ -1,22 +1,22 @@
 import TodoItem from "./TodoItem";
-
-// const tasks = [
-//   {
-//     name: "Прочитать 3 главу книги",
-//     isCompleted: true,
-//   },
-//   {
-//     name: "Приготовить ужин",
-//     isCompleted: false,
-//   },
-// ];
+import NotFound from "./NotFound";
 
 function TodoList(props) {
   return (
     <ul className="todo-list">
-      {props.tasks.map((task, index) => (
-        <TodoItem name={task.name} isCompleted={task.isCompleted} key={index} />
-      ))}
+      {props.tasks.length === 0 ? (
+        <NotFound />
+      ) : (
+        props.tasks.map((task, index) => (
+          <TodoItem
+            toggleTaskCompletion={props.toggleTaskCompletion}
+            deleteTask={props.deleteTask}
+            name={task.name}
+            isCompleted={task.isCompleted}
+            key={index}
+          />
+        ))
+      )}
     </ul>
   );
 }
