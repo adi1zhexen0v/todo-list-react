@@ -2,13 +2,24 @@ import Header from "./components/Header";
 import Categories from "./components/Categories";
 import TodoList from "./components/TodoList";
 import Footer from "./components/Footer";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const categories = ["Все", "Завершенные", "Не завершенные"];
 
 function App() {
   const [tasks, setTasks] = useState([]);
   const [activeCategory, setActiveCategory] = useState(0);
+
+  useEffect(() => {
+    const storedTasks = JSON.parse(localStorage.getItem("tasks"));
+    if (storedTasks) {
+      setTasks(storedTasks);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   function toggleTaskCompletion(name) {
     const updatedTasks = tasks.map((task) => {

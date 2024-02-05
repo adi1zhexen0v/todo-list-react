@@ -4,11 +4,14 @@ function Footer({ addTask }) {
   const [isOpen, setIsOpen] = useState(false);
   const [taskInput, setTaskInput] = useState("");
 
+  
+
   function toogleForm() {
     setIsOpen(!isOpen);
   }
 
-  function handleClickAddTask() {
+  function handleSubmitAddTask(event) {
+    event.preventDefault();
     if (taskInput.length !== 0) {
       addTask(taskInput);
       setTaskInput("");
@@ -22,7 +25,11 @@ function Footer({ addTask }) {
   return (
     <footer className="app-footer">
       {isOpen ? (
-        <form action="#" className="form">
+        <form
+          action="#"
+          className="form"
+          onSubmit={(event) => handleSubmitAddTask(event)}
+        >
           <input
             type="text"
             placeholder="Введите..."
@@ -30,9 +37,7 @@ function Footer({ addTask }) {
             className="form-input"
             onChange={(event) => changeTaskInput(event)}
           />
-          <button className="form-btn" onClick={handleClickAddTask}>
-            Добавить
-          </button>
+          <button className="form-btn">Добавить</button>
         </form>
       ) : (
         <div></div>
